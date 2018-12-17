@@ -49,10 +49,11 @@ def search_folder(folder, text):
     for item in items:
         full_item = os.path.join(folder, item)
         if os.path.isdir(full_item):
-            continue
-
-        matches = search_file(full_item, text)
-        all_matches.extend(matches)
+            matches = search_folder(full_item,text)
+            all_matches.extend(matches)
+        else:
+            matches = search_file(full_item, text)
+            all_matches.extend(matches)
 
     return all_matches
 
@@ -73,13 +74,15 @@ def main():
 
     matches = search_folder(folder, text)
     # print(matches)
+    match_count = 0
     for m in matches:
-        print("----------MATCH-----------")
-        print("file: " + m.file)
-        print("line: {}".format(m.line))
-        print("match: {}".format(m.text.strip()))
-        print()
-
+        match_count += 1
+        # print("----------MATCH-----------")
+        # print("file: " + m.file)
+        # print("line: {}".format(m.line))
+        # print("match: {}".format(m.text.strip()))
+        # print()
+    print("Found {:,} matches.".format(match_count))
 
 if __name__ == "__main__":
     main()
