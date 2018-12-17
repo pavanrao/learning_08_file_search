@@ -44,7 +44,7 @@ def search_file(filename, search_text):
 
 def search_folder(folder, text):
 
-   # all_matches = []
+    # all_matches = []
     items = os.listdir(folder)
 
     for item in items:
@@ -57,7 +57,7 @@ def search_folder(folder, text):
             #    yield m
 
             # yield from matches
-            yield from search_folder(full_item,text)
+            yield from search_folder(full_item, text)
         else:
             # matches = search_file(full_item, text)
             # all_matches.extend(matches)
@@ -96,6 +96,7 @@ def main():
         print("match: {}".format(m.text.strip()))
         print()
     print("Found {:,} matches.".format(match_count))
+
 
 if __name__ == "__main__":
     main()
